@@ -1,0 +1,6 @@
+# Data files (bag only - too large for git)
+lidar_processing/data/*.bag
+
+# macOS
+.DS_Store
+**/.DS_Store

@@ -21,8 +21,7 @@ from rosbags.typesys import Stores, get_typestore
 # ──────────────────────────────────────────────
 # Config
 # ──────────────────────────────────────────────
-BAG_FILE = Path(__file__).parent / "data" / "lidar2.bag"
-OUTPUT_DIR = Path(__file__).parent / "data"
+DATA_DIR = Path(__file__).parent / "data"
 
 
 def sanitise_topic_name(topic: str) -> str:
@@ -112,34 +111,33 @@ def write_csv(rows: list[dict], path: Path):
     print(f"  ✓  Wrote {len(rows)} rows → {path.name}")
 
 
-def main():
-    if not BAG_FILE.exists():
-        print(f"ERROR: Bag file not found: {BAG_FILE}")
-        sys.exit(1)
+def process_bag(bag_path: Path):
+    """Process a single bag file and write CSV(s)."""
+    bag_stem = bag_path.stem  # e.g. 'indoor_lidar'
+    print(f"\n{'─' * 60}")
+    print(f"  Processing: {bag_path.name} ({bag_path.stat().st_size / 1e6:.1f} MB)")
+    print(f"{'─' * 60}")
 
-    print(f"Opening {BAG_FILE.name} ({BAG_FILE.stat().st_size} bytes)")
     typestore = get_typestore(Stores.ROS1_NOETIC)
 
-    with Reader(BAG_FILE) as reader:
+    with Reader(bag_path) as reader:
         connections = list(reader.connections)
 
         if not connections:
-            print("\n⚠  No topics found in the bag file.")
-            print("   The bag may be empty or corrupted.")
-            print("   Replace lidar2.bag with a valid file and re-run.")
-            sys.exit(0)
+            print(f"  ⚠  No topics found in {bag_path.name} — skipping")
+            return
 
-        print(f"Found {len(connections)} topic(s):\n")
+        print(f"  Found {len(connections)} topic(s):")
         for conn in connections:
-            print(f"  • {conn.topic}  [{conn.msgtype}]  ({conn.msgcount} msgs)")
+            print(f"    • {conn.topic}  [{conn.msgtype}]  ({conn.msgcount} msgs)")
 
         print()
 
         for conn in connections:
             topic_name = sanitise_topic_name(conn.topic)
-            out_path = OUTPUT_DIR / f"{topic_name}_data.csv"
+            out_path = DATA_DIR / f"{bag_stem}_{topic_name}_data.csv"
 
-            print(f"Extracting: {conn.topic}")
+            print(f"  Extracting: {conn.topic}")
 
             if "LaserScan" in conn.msgtype:
                 rows = extract_laser_scan(reader, typestore, conn)
@@ -148,7 +146,20 @@ def main():
 
             write_csv(rows, out_path)
 
-    print("\nDone! ✓")
+
+def main():
+    bag_files = sorted(DATA_DIR.glob("*.bag"))
+
+    if not bag_files:
+        print(f"ERROR: No .bag files found in {DATA_DIR}")
+        sys.exit(1)
+
+    print(f"Found {len(bag_files)} bag file(s) in {DATA_DIR.name}/")
+
+    for bag_path in bag_files:
+        process_bag(bag_path)
+
+    print(f"\nAll done! ✓")
 
 
 if __name__ == "__main__":
