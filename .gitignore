@@ -1,6 +1,9 @@
 # Data files (bag only - too large for git)
 lidar_processing/data/*.bag
 
+# Generated camera frame exports
+camera/clean_frames/
+
 # macOS
 .DS_Store
 **/.DS_Store
