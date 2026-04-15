@@ -2,7 +2,6 @@
 lidar_processing/data/*.bag
 
 # Generated camera frame exports
-camera/clean_frames/
 
 # macOS
 .DS_Store
