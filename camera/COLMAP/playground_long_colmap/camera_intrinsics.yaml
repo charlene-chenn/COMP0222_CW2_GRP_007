@@ -1,0 +1,47 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# Camera Parameters. Auto-generated from COLMAP OPENCV intrinsics
+#--------------------------------------------------------------------------------------------
+
+# Camera calibration and distortion parameters (OpenCV)
+Camera.fx: 1627.4106314705502
+Camera.fy: 1645.4744325976862
+Camera.cx: 540.0
+Camera.cy: 960.0
+Camera.width: 1080
+Camera.height: 1920
+
+Camera.k1: 0.1489517976197744
+Camera.k2: -0.26932731773616214
+Camera.p1: -0.0014311839038290096
+Camera.p2: 0.00019751959113493823
+
+# Camera frames per second
+Camera.fps: 30.0
+
+# Color order of the images (0: BGR, 1: RGB)
+Camera.RGB: 1
+
+#--------------------------------------------------------------------------------------------
+# ORB Parameters
+#--------------------------------------------------------------------------------------------
+ORBextractor.nFeatures: 6500
+ORBextractor.scaleFactor: 1.1
+ORBextractor.nLevels: 10
+ORBextractor.iniThFAST: 4
+ORBextractor.minThFAST: 2
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#--------------------------------------------------------------------------------------------
+Viewer.KeyFrameSize: 0.1
+Viewer.KeyFrameLineWidth: 1
+Viewer.GraphLineWidth: 1
+Viewer.PointSize: 2
+Viewer.CameraSize: 0.15
+Viewer.CameraLineWidth: 2
+Viewer.ViewpointX: 0
+Viewer.ViewpointY: -10
+Viewer.ViewpointZ: -0.1
+Viewer.ViewpointF: 2000

@@ -1,29 +1,20 @@
-# Data files (bag only - too large for git)
-lidar_processing/data/*.bag
-
-# Generated camera frame exports
-camera/Videos/
-
-# macOS
 .DS_Store
 **/.DS_Store
-
-# Documents
 *.docx
 
-# SLAM Data and Results (Exclude from submission)
+# Data folders
 camera/COLMAP/
 camera/clean_frames/
 camera/Videos/
 camera/data_without_bag/
 lidar_processing/data/
-**/*.npy
-**/*.db
-**/*.bin
 
-# Build files and SLAM results
-__pycache__/
-*.pyc
-*/evo/
+# Result/Build files
+**/evo/
 *results.txt
 *ref_tum.txt
+__pycache__/
+*.pyc
+*.npy
+*.db
+*.bin
