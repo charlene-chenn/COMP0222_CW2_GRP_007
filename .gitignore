@@ -2,14 +2,15 @@
 **/.DS_Store
 *.docx
 
-# Data folders
+# Data folders (Excluded)
 camera/COLMAP/
 camera/clean_frames/
 camera/Videos/
 camera/data_without_bag/
+camera/SLAM/
 lidar_processing/data/
 
-# Result/Build files
+# Specific result files
 **/evo/
 *results.txt
 *ref_tum.txt
