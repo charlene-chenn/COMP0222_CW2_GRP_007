@@ -7,6 +7,7 @@ This directory contains the complete pipeline for Monocular SLAM, covering data 
 ## 📁 Directory Structure
 
 - **`COLMAP/`**: Project files and refined camera intrinsics derived from Structure-from-Motion.
+    - Intrinsics are located at: `question2/COLMAP/<dataset>/camera_intrinsics.yaml`
 - **`SLAM/`**: TUM-formatted datasets and output trajectories for evaluation.
 - **`Videos/`**: Raw source recordings (.MOV).
 - **`clean_frames/`**: Extracted image sequences used for both calibration and SLAM.
