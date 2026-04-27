@@ -9,18 +9,17 @@ To implement the code changes, clone this repository (https://github.com/UCL/COM
 
 | Test | Task | File Changes | Command |
 |------|------|--------------|---------|
-| **1.a** | Baseline (default settings) | None | `./Install/bin/mono_kitti KITTI00-02.yaml dataset/sequences/07 output.txt` |
-| **1.b** | Vary ORB feature count | Edit `KITTI00-02.yaml`: change `ORBextractor.nFeatures` to 1500, 1000 | Same command as 1.a |
+| **1.a** | Baseline (default settings) | None | `./Install/bin/mono_kitti KITTI04-12.yaml <file>.txt` |
+| **1.b** | Vary ORB feature count | Edit `KITTI*.yaml`: change `ORBextractor.nFeatures` | Same command as 1.a |
 | **1.c** | Disable outlier rejection | Edit `Optimizer.cc` lines 703, 717 | Same command as 1.a |
 | **1.d** | Disable loop closure | Edit `LoopClosing.cc` lines 60-68 | Same command as 1.a |
 
 ---
-
 ## Question 1.a: Baseline Evaluation
 
 ### Run Baseline on KITTI 07:
 ```bash
-cd /Users/charlenechen/COMP0222-249_25-26_ORB_SLAM2
+cd /Users/<your_directory>/COMP0222-249_25-26_ORB_SLAM2
 
 ./Install/bin/mono_kitti \
   ./Install/etc/orbslam2/Monocular/KITTI00-02.yaml \
@@ -40,11 +39,11 @@ cd /Users/charlenechen/COMP0222-249_25-26_ORB_SLAM2
 ```bash
 # KITTI 07
 evo_ape tum dataset/poses/07.txt test/baseline_kitti07.txt \
-  -as --t_max_diff 0.05 -p --plot_mode xyz --save_plot baseline_kitti07.png
+  -as -p --plot_mode xyz --save_plot baseline_kitti07.png
 
 # TUM
 evo_ape tum rgbd_dataset_freiburg2_desk_with_person/groundtruth.txt test/baseline_tum_fr2.txt \
-  -as --t_max_diff 0.05 -p --plot_mode xyz --save_plot baseline_tum_fr2.png
+  -as -p --plot_mode xyz --save_plot baseline_tum_fr2.png
 ```
 
 ---

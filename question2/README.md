@@ -4,7 +4,7 @@ This directory contains the complete pipeline for Monocular SLAM, covering data 
 
 ---
 
-## 📁 Directory Structure
+## Directory Structure
 
 - **`COLMAP/`**: Project files and refined camera intrinsics derived from Structure-from-Motion.
     - Intrinsics are located at: `question2/COLMAP/<dataset>/camera_intrinsics.yaml`
@@ -14,7 +14,7 @@ This directory contains the complete pipeline for Monocular SLAM, covering data 
 
 ---
 
-## 🚀 Script Documentation
+## Script Documentation
 
 ### 1. Data Capture & Pre-processing
 
@@ -83,7 +83,7 @@ Python wrapper for the `evo` package to analyze trajectory accuracy.
 
 ---
 
-## 🛠 Standard Usage Workflow
+## Standard Usage Workflow
 
 1. **Extract**: `python3 extract.py Videos/lobby.MOV -o clean_frames/lobby`
 2. **Format**: `python3 generate_tum_format.py clean_frames/lobby SLAM/lobby_SLAM --fps 30`
