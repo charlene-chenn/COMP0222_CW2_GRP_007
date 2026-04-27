@@ -20,15 +20,15 @@ from pathlib import Path
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-DATASET_PLAYGROUND_LONG = SCRIPT_DIR / "playground_long_SLAM"
-COLMAP_PLAYGROUND_LONG_IMAGES = SCRIPT_DIR / "playground_long_colmap" / "txt_export" / "images.txt"
+DATASET_PLAYGROUND_LONG = SCRIPT_DIR / "SLAM" / "playground_long_SLAM"
+COLMAP_PLAYGROUND_LONG_IMAGES = SCRIPT_DIR / "COLMAP" / "playground_long_colmap" / "results_txt" / "images.txt"
 RGB_PLAYGROUND_LONG = DATASET_PLAYGROUND_LONG / "rgb.txt"
-EST_PLAYGROUND_LONG = DATASET_PLAYGROUND_LONG / "orb_slam_results.txt"
+EST_PLAYGROUND_LONG = DATASET_PLAYGROUND_LONG / "playground_long_results_tuned.txt"
 REF_PLAYGROUND_LONG = DATASET_PLAYGROUND_LONG / "colmap_ref_tum.txt"
 RESULTS_PLAYGROUND_LONG = DATASET_PLAYGROUND_LONG / "evo"
 
-DATASET_LOBBY = SCRIPT_DIR / "lobby_SLAM"
-COLMAP_LOBBY_IMAGES = SCRIPT_DIR / "lobby_colmap" / "colmap_output" / "sparse" / "1_txt" / "images.txt"
+DATASET_LOBBY = SCRIPT_DIR / "SLAM" / "lobby_SLAM"
+COLMAP_LOBBY_IMAGES = SCRIPT_DIR / "COLMAP" / "lobby_colmap" / "results_txt" / "images.txt"
 RGB_LOBBY = DATASET_LOBBY / "rgb.txt"
 EST_LOBBY = DATASET_LOBBY / "orb_slam_results.txt"
 REF_LOBBY = DATASET_LOBBY / "colmap_ref_tum.txt"
