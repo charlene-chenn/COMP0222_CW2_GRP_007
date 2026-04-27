@@ -2,15 +2,16 @@
 **/.DS_Store
 *.docx
 
-# Data folders (Excluded)
-camera/COLMAP/
-camera/clean_frames/
-camera/Videos/
-camera/data_without_bag/
-camera/SLAM/
-lidar_processing/data/
+# Question 2 Data (Excluded)
+question2/COLMAP/
+question2/clean_frames/
+question2/Videos/
+question2/SLAM/
 
-# Specific result files
+# Question 3 Data (Excluded)
+question3/data/
+
+# General patterns to ignore
 **/evo/
 *results.txt
 *ref_tum.txt
@@ -19,3 +20,6 @@ __pycache__/
 *.npy
 *.db
 *.bin
+*.bag
+*.json
+
