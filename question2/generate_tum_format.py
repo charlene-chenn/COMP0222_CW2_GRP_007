@@ -6,7 +6,7 @@ Usage:
     python3 generate_tum_format.py <frames_dir> <output_dir> [fps]
 
 Example:
-    python3 generate_tum_format.py camera/clean_frames/playground_longer camera/playground_SLAM 29.997
+    python3 generate_tum_format.py question2/clean_frames/playground_longer question2/playground_SLAM 29.997
 """
 
 import os

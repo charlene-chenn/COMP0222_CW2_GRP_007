@@ -17,15 +17,15 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 MONO_TUM="/Users/omarahmed/orb_slam2_build/Install/bin/mono_tum"
 
 # Preset datasets/calibrations used in this project.
-YAML_PLAYGROUND_LONG="$SCRIPT_DIR/playground_long_colmap/camera_intrinsics.yaml"
-YAML_PLAYGROUND="$SCRIPT_DIR/playground_colmap/camera_intrinsics.yaml"
-YAML_CLASSROOM="$SCRIPT_DIR/classroom_colmap/camera_intrinsics.yaml"
-YAML_LOBBY="$SCRIPT_DIR/lobby_SLAM/camera_intrinsics.yaml"
+YAML_PLAYGROUND_LONG="$SCRIPT_DIR/COLMAP/playground_long_colmap/camera_intrinsics.yaml"
+YAML_PLAYGROUND="$SCRIPT_DIR/COLMAP/playground_colmap/camera_intrinsics.yaml"
+YAML_CLASSROOM="$SCRIPT_DIR/COLMAP/classroom_colmap/camera_intrinsics.yaml"
+YAML_LOBBY="$SCRIPT_DIR/COLMAP/lobby_colmap/colmap_output/camera_intrinsics.yaml"
 
-DATASET_PLAYGROUND_LONG="$SCRIPT_DIR/playground_long_SLAM"
-DATASET_PLAYGROUND="$SCRIPT_DIR/playground_SLAM"
-DATASET_CLASSROOM="$SCRIPT_DIR/classroom_SLAM"
-DATASET_LOBBY="$SCRIPT_DIR/lobby_SLAM"
+DATASET_PLAYGROUND_LONG="$SCRIPT_DIR/SLAM/playground_long_SLAM"
+DATASET_PLAYGROUND="$SCRIPT_DIR/SLAM/playground_SLAM"
+DATASET_CLASSROOM="$SCRIPT_DIR/SLAM/classroom_SLAM"
+DATASET_LOBBY="$SCRIPT_DIR/SLAM/lobby_SLAM"
 
 OUT_PLAYGROUND_LONG="$DATASET_PLAYGROUND_LONG/orb_slam_results.txt"
 OUT_PLAYGROUND="$DATASET_PLAYGROUND/orb_slam_results.txt"
@@ -72,37 +72,37 @@ Commands:
 
 	runplaygroundlong
 		Run playground_long dataset:
-		YAML:    camera/playground_long_colmap/camera_intrinsics.yaml
-		Dataset: camera/playground_long_SLAM
-		Output:  camera/playground_long_SLAM/orb_slam_results.txt
+		YAML:    question2/playground_long_colmap/camera_intrinsics.yaml
+		Dataset: question2/playground_long_SLAM
+		Output:  question2/playground_long_SLAM/orb_slam_results.txt
 
 	runplayground
 		Run playground dataset:
-		YAML:    camera/playground_colmap/camera_intrinsics.yaml
-		Dataset: camera/playground_SLAM
-		Output:  camera/playground_SLAM/orb_slam_results.txt
+		YAML:    question2/playground_colmap/camera_intrinsics.yaml
+		Dataset: question2/playground_SLAM
+		Output:  question2/playground_SLAM/orb_slam_results.txt
 
 	runclassroom
 		Run classroom dataset:
-		YAML:    camera/classroom_colmap/camera_intrinsics.yaml
-		Dataset: camera/classroom_SLAM
-		Output:  camera/classroom_SLAM/orb_slam_results.txt
+		YAML:    question2/classroom_colmap/camera_intrinsics.yaml
+		Dataset: question2/classroom_SLAM
+		Output:  question2/classroom_SLAM/orb_slam_results.txt
 
 	runlobby
 		Run lobby dataset:
-		YAML:    camera/lobby_SLAM/camera_intrinsics.yaml
-		Dataset: camera/lobby_SLAM
-		Output:  camera/lobby_SLAM/orb_slam_results.txt
+		YAML:    question2/lobby_SLAM/camera_intrinsics.yaml
+		Dataset: question2/lobby_SLAM
+		Output:  question2/lobby_SLAM/orb_slam_results.txt
 
 	run <yaml> <dataset_dir> [output_file]
 		Fully custom run.
 		If output_file is omitted, uses: <dataset_dir>/orb_slam_results.txt
 
 Examples:
-	./camera/run_orbslam.sh runplaygroundlong
-	./camera/run_orbslam.sh runplayground
-	./camera/run_orbslam.sh runclassroom
-	./camera/run_orbslam.sh runlobby
+	./question2/run_orbslam.sh runplaygroundlong
+	./question2/run_orbslam.sh runplayground
+	./question2/run_orbslam.sh runclassroom
+	./question2/run_orbslam.sh runlobby
 EOF
 }
 

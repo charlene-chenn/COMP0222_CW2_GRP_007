@@ -70,6 +70,12 @@ def make_colmap_tum(colmap_images_txt: Path, rgb_txt: Path, out_tum: Path) -> No
     if not rgb_txt.exists():
         die(f"rgb.txt not found: {rgb_txt}")
 
+    def get_frame_num(filename: str) -> str:
+        # Extract numbers from frame_XXXXX.jpg -> XXXXX
+        import re
+        match = re.search(r"(\d+)", filename)
+        return str(int(match.group(1))) if match else filename
+
     name_to_ts: dict[str, float] = {}
     with rgb_txt.open("r", encoding="utf-8", errors="ignore") as f:
         for line in f:
@@ -81,7 +87,7 @@ def make_colmap_tum(colmap_images_txt: Path, rgb_txt: Path, out_tum: Path) -> No
                 continue
             ts = float(parts[0])
             base = os.path.basename(parts[1])
-            name_to_ts[base] = ts
+            name_to_ts[get_frame_num(base)] = ts
 
     def quat_to_rot(qw: float, qx: float, qy: float, qz: float) -> list[list[float]]:
         return [
@@ -107,10 +113,17 @@ def make_colmap_tum(colmap_images_txt: Path, rgb_txt: Path, out_tum: Path) -> No
             if not line or line.startswith("#"):
                 continue
             parts = line.split()
-            if len(parts) < 10 or not parts[0].isdigit():
+            # Image header lines always have exactly 10 fields.
+            # Point lines have 3 * N_points fields (usually hundreds or thousands).
+            if len(parts) != 10:
                 continue
+            
             image_name = os.path.basename(parts[9])
-            if image_name not in name_to_ts:
+            if not (image_name.lower().endswith(".jpg") or image_name.lower().endswith(".png")):
+                continue
+
+            frame_num = get_frame_num(image_name)
+            if frame_num not in name_to_ts:
                 continue
 
             qw = float(parts[1])
@@ -125,7 +138,7 @@ def make_colmap_tum(colmap_images_txt: Path, rgb_txt: Path, out_tum: Path) -> No
             r_wc = transpose(r_cw)
             c_w = mat_vec_mul(r_wc, [-tx, -ty, -tz])
 
-            ts = name_to_ts[image_name]
+            ts = name_to_ts[frame_num]
             rows.append((ts, c_w[0], c_w[1], c_w[2], -qx, -qy, -qz, qw))
 
     rows.sort(key=lambda row: row[0])
@@ -241,15 +254,15 @@ Commands:
 
   runplaygroundlong
     Build TUM reference from COLMAP + rgb timestamps, then run EVO against:
-      ref: camera/playground_long_SLAM/colmap_ref_tum.txt
-      est: camera/playground_long_SLAM/orb_slam_results.txt
-      out: camera/playground_long_SLAM/evo
+      ref: question2/playground_long_SLAM/colmap_ref_tum.txt
+      est: question2/playground_long_SLAM/orb_slam_results.txt
+      out: question2/playground_long_SLAM/evo
 
   runlobby
     Build TUM reference from COLMAP + rgb timestamps, then run EVO against:
-      ref: camera/lobby_SLAM/colmap_ref_tum.txt
-      est: camera/lobby_SLAM/orb_slam_results.txt
-      out: camera/lobby_SLAM/evo
+      ref: question2/lobby_SLAM/colmap_ref_tum.txt
+      est: question2/lobby_SLAM/orb_slam_results.txt
+      out: question2/lobby_SLAM/evo
 
   run <ref_tum> <est_tum> [results_dir]
     Run EVO comparison on custom TUM trajectories.
@@ -258,8 +271,8 @@ Commands:
     Convert COLMAP images.txt into TUM trajectory using rgb.txt timestamps.
 
 Examples:
-  python3 camera/run_evo.py runplaygroundlong
-  python3 camera/run_evo.py run \
+  python3 question2/run_evo.py runplaygroundlong
+  python3 question2/run_evo.py run \
     /abs/path/ref.txt \
     /abs/path/est.txt \
     /abs/path/evo_results
